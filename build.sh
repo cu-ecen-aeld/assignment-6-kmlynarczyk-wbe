@@ -22,7 +22,6 @@ else
 	echo "${CONFLINE} already exists in the local.conf file"
 fi
 
-
 bitbake-layers show-layers | grep "meta-aesd" > /dev/null
 layer_info=$?
 
@@ -34,4 +33,6 @@ else
 fi
 
 set -e
-bitbake core-image-aesd
+export BB_NUMBER_THREADS=4
+export PARALLEL_MAKE="-j 4"
+taskset -c 0-3 bitbake core-image-aesd
