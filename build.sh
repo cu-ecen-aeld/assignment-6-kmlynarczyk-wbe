@@ -22,6 +22,7 @@ else
 	echo "${CONFLINE} already exists in the local.conf file"
 fi
 
+echo "CONNECTIVITY_CHECK_URIS = \"\"" >> conf/local.conf
 bitbake-layers show-layers | grep "meta-aesd" > /dev/null
 layer_info=$?
 
